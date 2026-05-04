@@ -1,0 +1,39 @@
+# OS
+.DS_Store
+Thumbs.db
+.AppleDouble
+.LSOverride
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.obsidian/workspace*
+
+# Node / npm
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm/
+.pnpm-store/
+
+# Astro (sites/public)
+sites/public/dist/
+sites/public/.astro/
+sites/public/.vercel/
+sites/public/.netlify/
+
+# Quartz (sites/personal)
+sites/personal/public/
+sites/personal/.quartz-cache/
+
+# Logs
+*.log
+
+# Env files
+.env
+.env.local
+.env.*.local

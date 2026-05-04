@@ -1,0 +1,82 @@
+name: Deploy two-site Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Setup pnpm (for Fuwari)
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Sync WIKI -> sites
+        run: node scripts/sync-wiki.mjs
+
+      # ---------- Site A: Public (Astro Fuwari) ----------
+      - name: Install Fuwari deps
+        working-directory: sites/public
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Fuwari
+        working-directory: sites/public
+        run: pnpm build
+
+      # ---------- Site B: Personal (Quartz) ----------
+      - name: Install Quartz deps
+        working-directory: sites/personal
+        run: npm ci
+
+      - name: Build Quartz
+        working-directory: sites/personal
+        run: npx quartz build
+
+      # ---------- Combine: public at root, personal at /notes/ ----------
+      - name: Combine sites
+        run: |
+          mkdir -p _site
+          cp -r sites/public/dist/* _site/
+          mkdir -p _site/notes
+          cp -r sites/personal/public/* _site/notes/
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
