@@ -1,7 +1,8 @@
 @use "./base.scss";
 
-// Pretendard 한글 폰트 적용
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+// Pretendard font is loaded via <link> in Head.tsx — putting `@import url()`
+// here breaks the build because it must precede all CSS rules but base.scss
+// is already imported above.
 
 :root {
   --bodyFont: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;

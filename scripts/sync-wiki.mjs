@@ -122,7 +122,42 @@ async function main() {
     }
   }
 
+  // Quartz needs a content/index.md homepage. Generate one from synced files.
+  const items = [];
+  for (const file of files) {
+    const raw = await readFile(join(WIKI_DIR, file), "utf-8");
+    const { frontmatter: fm } = parseFrontmatter(raw);
+    items.push({
+      slug: file.replace(/\.md$/, ""),
+      title: fm.title || file,
+      summary: fm.summary || "",
+      published: fm.publish === true,
+    });
+  }
+
+  const indexBody = [
+    "---",
+    'title: "MR_5PM Notes"',
+    "---",
+    "",
+    "# MR_5PM Notes 📓",
+    "",
+    "AI · 콘텐츠 · 개발에 대한 모든 작업 노트와 글을 모아둔 곳입니다.",
+    "",
+    "## 전체 글",
+    "",
+    ...items.map(
+      (it) => `- ${it.published ? "🔓" : "🔒"} [[${it.slug}|${it.title}]]${it.summary ? ` — ${it.summary}` : ""}`,
+    ),
+    "",
+    "> 🔓 = 공개 사이트(메인)에도 노출 · 🔒 = 여기 (Notes) 에서만",
+    "",
+  ].join("\n");
+
+  await writeFile(join(PERSONAL_DIR, "index.md"), indexBody);
+
   console.log(`✓ Synced ${personalCount} files → sites/personal/content/`);
+  console.log(`✓ Generated content/index.md with ${items.length} entries`);
   console.log(`✓ Synced ${publicCount} files → sites/public/src/content/posts/ (publish: true only)`);
 }
 
