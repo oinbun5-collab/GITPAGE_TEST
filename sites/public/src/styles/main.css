@@ -461,3 +461,29 @@ html, body, .bg-\[var\(--page-bg\)\] {
 
 /* Drop the Fuwari "primary color hue" picker effect */
 :root { --hue: 30 !important; }
+
+/* Profile avatar — square monogram, no grayscale (it's already monochrome) */
+#sidebar .card-base a[href*="/about/"] {
+    border-radius: 0 !important;
+    border: 1px solid var(--rule);
+}
+#sidebar .card-base a[href*="/about/"] img {
+    filter: none !important;
+    border-radius: 0 !important;
+}
+
+/* Profile name + bio in editorial type */
+#sidebar .card-base .font-bold {
+    font-family: var(--font-serif-sc) !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: var(--headline-tracking);
+    color: var(--ink) !important;
+}
+#sidebar .card-base .text-center {
+    font-family: var(--font-serif) !important;
+    font-style: italic;
+    color: var(--ink-soft) !important;
+}
+/* Drop the colored accent bar under the name */
+#sidebar .card-base .h-1 { display: none !important; }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <pattern id="paperDots" patternUnits="userSpaceOnUse" width="3" height="3">
+      <circle cx="0.5" cy="0.5" r="0.5" fill="rgba(0,0,0,0.025)"/>
+    </pattern>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="3"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+
+  <rect width="400" height="400" fill="#f6f3ec"/>
+  <rect width="400" height="400" fill="url(#paperDots)"/>
+  <rect width="400" height="400" filter="url(#grain)" opacity="0.6"/>
+
+  <rect x="32" y="36" width="336" height="1" fill="#161410"/>
+  <rect x="32" y="60" width="336" height="3" fill="#161410"/>
+  <rect x="32" y="338" width="336" height="3" fill="#161410"/>
+  <rect x="32" y="362" width="336" height="1" fill="#161410"/>
+
+  <text x="200" y="52" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="11" letter-spacing="6" font-style="italic"
+        fill="#5a5750">VOL. I &#xB7; ISSUE 001</text>
+
+  <text x="200" y="200" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="120" font-weight="700" letter-spacing="-4"
+        fill="#161410">MR</text>
+
+  <text x="200" y="262" text-anchor="middle"
+        font-family="'Brush Script MT', 'Snell Roundhand', cursive"
+        font-size="58" font-weight="400" font-style="italic"
+        fill="#161410">five pm</text>
+
+  <rect x="120" y="285" width="160" height="1" fill="#5a5750"/>
+
+  <text x="200" y="312" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="10" letter-spacing="4" font-style="italic"
+        fill="#5a5750">a journal of A.I. &#xB7; content &#xB7; code</text>
+
+  <text x="200" y="354" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="9" letter-spacing="6"
+        fill="#161410">SPRING &#xB7; 2026</text>
+</svg>

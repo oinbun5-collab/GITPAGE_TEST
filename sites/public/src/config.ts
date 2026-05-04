@@ -53,7 +53,7 @@ export const navBarConfig: NavBarConfig = {
 };
 
 export const profileConfig: ProfileConfig = {
-	avatar: "assets/images/demo-avatar.png",
+	avatar: "assets/images/mr5pm-monogram.svg",
 	name: "MR_5PM",
 	bio: "AI 콘텐츠 크리에이터 / 강사 / 개발자. Claude·옵시디언·자동화로 만드는 디지털 정원.",
 	links: [
