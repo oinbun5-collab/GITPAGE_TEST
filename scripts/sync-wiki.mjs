@@ -45,6 +45,10 @@ function parseFrontmatter(raw) {
   return { frontmatter: fm, body };
 }
 
+// Astro/Fuwari content schema parses `published` as a Date type — must be
+// emitted as bare YYYY-MM-DD (no quotes). Same for any other date-shaped value.
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+
 function serializeFrontmatter(fm) {
   const lines = ["---"];
   for (const [k, v] of Object.entries(fm)) {
@@ -54,6 +58,8 @@ function serializeFrontmatter(fm) {
       lines.push(`${k}: ${v}`);
     } else if (v === "" || v == null) {
       lines.push(`${k}: ""`);
+    } else if (typeof v === "string" && DATE_RE.test(v)) {
+      lines.push(`${k}: ${v}`);
     } else {
       lines.push(`${k}: ${JSON.stringify(String(v))}`);
     }

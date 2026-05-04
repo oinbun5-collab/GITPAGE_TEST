@@ -1,6 +1,6 @@
 ---
 title: "환영합니다"
-published: "2026-05-04"
+published: 2026-05-04
 description: "MR_5PM의 위키/블로그에 오신 것을 환영합니다. 이 사이트의 정체성과 다루는 주제 소개."
 tags: ["welcome", "intro", "hello"]
 category: "Personal"
