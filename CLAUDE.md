@@ -169,6 +169,33 @@ INDEX.md는 두 섹션 + publish 상태 표시:
 
 ---
 
+## 마이그레이션 상태 (GitHub Pages → Cloudflare Pages)
+
+### 현황
+- **현재**: GitHub Pages 배포 중
+  - sites/public → `negalab.github.io/GITPAGE_TEST/`
+  - sites/personal → `negalab.github.io/GITPAGE_TEST/notes/`
+- **목표**: Cloudflare Pages로 이전 (서버 함수 활성화 필요)
+- **이유**: 결제, 데이터베이스, 이메일 등 서버 기능 필요 (GitHub Pages는 정적 호스팅만 가능)
+- **우선순위**: 1) 인프라 마이그레이션 완료 → 2) Toss Payments 통합
+
+### Cloudflare Pages 설정값 (미배포)
+| 사이트 | Framework | Build 명령어 | Output | 목표 URL |
+|--------|-----------|-------------|--------|---------|
+| public (A) | Astro | `npm run build` | `sites/public/dist` | `{project}.pages.dev` |
+| personal (B) | Static (Quartz v4) | `cd sites/personal && npx quartz build` | `sites/personal/_site` | `{project}-personal}.pages.dev` |
+
+### TODO
+- [ ] Cloudflare 계정 생성
+- [ ] GitHub 리포지토리 연동 (GITPAGE_TEST)
+- [ ] sites/public Cloudflare Pages 배포
+- [ ] sites/personal Cloudflare Pages 배포
+- [ ] 도메인 설정 (선택사항)
+- [ ] GitHub Actions 워크플로우 수정 (GitHub Pages → Cloudflare Pages)
+- [ ] Toss Payments 테스트 모드 연동 (별도 PR)
+
+---
+
 ## 동기화 / 빌드 / 배포
 
 ### 로컬 개발
