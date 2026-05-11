@@ -26,8 +26,8 @@ import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-cop
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://negalab.github.io",
-	base: "/GITPAGE_TEST/",
+	site: "https://gitpage-test.pages.dev",
+	base: "/",
 	trailingSlash: "always",
 	integrations: [
 		tailwind({
